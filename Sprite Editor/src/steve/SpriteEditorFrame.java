@@ -57,6 +57,7 @@ import net.openrs.cache.FileStore;
 import net.openrs.cache.def.RSInterface;
 import net.openrs.cache.sprite.Sprite;
 import net.openrs.cache.util.WindowsExplorerStringComparator;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -600,8 +601,9 @@ public class SpriteEditorFrame extends javax.swing.JFrame {
 		Arrays.sort(files, new WindowsExplorerStringComparator());
 
 		List<File> orderedDump = Arrays.asList(files);
+		List<File> listOfSprites = orderedDump;
 //		List<File> listOfSprites = orderedDump.subList(0, 7000);
-		List<File> listOfSprites = orderedDump.subList(7000, orderedDump.size());
+//		List<File> listOfSprites = orderedDump.subList(7000, orderedDump.size());
 		int totalAdded = 0;
 		Set<Integer> brokenSpriteIds = new HashSet<>();
 		for(File sprite : listOfSprites) {
@@ -634,8 +636,9 @@ public class SpriteEditorFrame extends javax.swing.JFrame {
 					newSprite.images.set(subId, image);
 					subId += 1;
 				}
-				if(subId > 1)
-					System.out.println(id + " had " + subId + " subIds completed ");
+				File usableFile = new File("./usable/" + sprite.getName());
+				FileUtils.copyFile(sprite, usableFile);
+				System.out.println(sprite.getName() + " was copied");
 			} catch(FileNotFoundException e) {
 				newSprite = Sprite.get(cache, 0);
 				System.out.println(id + " had missing files");
@@ -647,9 +650,9 @@ public class SpriteEditorFrame extends javax.swing.JFrame {
 				e.printStackTrace();
 			} finally {
 				try {
-					this.sprite = Sprite.addSprite(cache, newSprite);//make a new one that accepts sprite
-					spritesNode.add(new DefaultMutableTreeNode(cache.getFileCount(8) - 1));
-					treeModel.reload(spritesNode);
+//					this.sprite = Sprite.addSprite(cache, newSprite);//make a new one that accepts sprite
+//					spritesNode.add(new DefaultMutableTreeNode(cache.getFileCount(8) - 1));
+//					treeModel.reload(spritesNode);
 				} catch (Exception f) {
 					System.out.println("BAD");
 					return;

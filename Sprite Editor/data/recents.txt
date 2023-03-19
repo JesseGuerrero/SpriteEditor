@@ -2,3 +2,5 @@ C:\Users\jesse\.darkanrs\caches\darkan\LIVE
 D:\Games\rsps-world-server\cache
 D:\Games\727\open727\727 server\data\cache
 D:\Games\727\727 cache 400 added regions\cache
+D:\Other\RSMod\data\cache
+D:\Games\Tools\Sprite Editor\Sprite Editor\data\cache\cache
